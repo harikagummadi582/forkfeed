@@ -90,7 +90,7 @@ export const kit = {
     { t: '35–55s', d: '3 next steps (skills, portfolio, opportunities)' },
     { t: '55–65s', d: 'Wrap up + CTA (ask your question)' },
   ],
-  caption: 'The Canva layoffs aren’t just about headcount — here’s what they mean for junior designers 👇',
+  caption: 'The Canva layoffs aren’t just about headcount — here’s what they mean for junior designers:',
   audio: 'Upbeat, modern tech (95–105 BPM)',
   why: [
     'High unanswered demand (312 questions)',

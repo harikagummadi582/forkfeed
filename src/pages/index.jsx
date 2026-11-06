@@ -5,7 +5,7 @@ import { generateKit } from '../api.js'
 const Head = ({ title, sub, children }) => (
   <div className="head"><div><h1>{title}</h1><div className="sub">{sub}</div></div><div className="row" style={{ alignItems: 'center' }}>{children}</div></div>
 )
-const Plats = () => <span>📷 🎵</span>
+const Plats = () => <span className="small">Instagram · TikTok</span>
 
 export function TrendRadar({ go }) {
   return (<>
@@ -33,7 +33,7 @@ export function DeepDive({ go }) {
   const [tab, setTab] = useState('Angle clusters')
   const color = { Crowded: ['b-red', '#ef4444'], Medium: ['b-amber', '#f59e0b'], Open: ['b-green', '#22c55e'] }
   return (<>
-    <Head title="Canva layoffs — Topic deep-dive" sub="237 videos from education creators · Last 7 days"><button className="btn">⟳ Refresh</button></Head>
+    <Head title="Canva layoffs — Topic deep-dive" sub="237 videos from education creators · Last 7 days"><button className="btn">Refresh</button></Head>
     <div className="tabs">{['Angle clusters', 'All videos (237)', 'Key takeaways'].map((t) => <button key={t} className={'tab' + (tab === t ? ' on' : '')} onClick={() => setTab(t)}>{t}</button>)}</div>
     <div className="card" style={{ padding: 6 }}>
       <table>
@@ -61,7 +61,7 @@ export function VideoBreakdown() {
   return (<>
     <Head title="Video breakdown" sub="Canva layoffs · Video 12 of 237"><button className="btn">‹</button><button className="btn">›</button></Head>
     <div className="row">
-      <div style={{ width: 240 }}><div className="video">The Canva layoffs in 60 seconds<small>▶ 0:00 / 1:24</small></div></div>
+      <div style={{ width: 240 }}><div className="video">The Canva layoffs in 60 seconds<small>0:00 / 1:24</small></div></div>
       <div className="col">
         <div className="tabs">{['Analysis', 'On-screen text', 'Comments (423)'].map((t) => <button key={t} className={'tab' + (tab === t ? ' on' : '')} onClick={() => setTab(t)}>{t}</button>)}</div>
         {tab === 'Analysis' && <div className="card">
@@ -99,10 +99,10 @@ export function AudienceGaps({ go }) {
           <div className="spark">{D.sentimentCurve.map((v, i) => <div key={i} style={{ height: v + '%' }} />)}</div></div>
       </div>
       <div className="card glow" style={{ alignSelf: 'start' }}>
-        <b style={{ color: 'var(--purple2)' }}>✨ What nobody covered</b>
+        <b style={{ color: 'var(--purple2)' }}>What nobody covered</b>
         <div className="big" style={{ margin: '14px 0' }}>{D.gap.title}</div>
-        {D.gap.points.map((p) => <div key={p} style={{ padding: '6px 0', color: 'var(--muted)' }}>✓ {p}</div>)}
-        <button className="btn lime" style={{ marginTop: 16, width: '100%' }} onClick={() => go('kit')}>Fork this angle →</button>
+        {D.gap.points.map((p) => <div key={p} style={{ padding: '6px 0', color: 'var(--muted)' }}>{p}</div>)}
+        <button className="btn lime" style={{ marginTop: 16, width: '100%' }} onClick={() => go('kit')}>Use this angle</button>
       </div>
     </div>
   </>)
@@ -115,7 +115,7 @@ export function CreatorProfile() {
     <div className="grid2" style={{ gridTemplateColumns: '1fr 1fr' }}>
       <div className="col">
         <div className="card row" style={{ alignItems: 'center' }}>
-          <div style={{ fontSize: 40 }}>🧑🏽‍💻</div>
+          <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--purple)', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 20 }}>A</div>
           <div><b style={{ fontSize: 18 }}>{c.name}</b><div className="small">{c.role}</div><div className="small">{c.followers} followers · {c.views} total views</div></div>
           <div style={{ marginLeft: 'auto' }}><div className="small" style={{ marginBottom: 6 }}>Niche</div>{c.niche.map((n) => <span className="chip" key={n}>{n}</span>)}</div>
         </div>
@@ -140,24 +140,24 @@ export function ForkKit() {
   const [approved, setApproved] = useState(false)
   const regen = async () => { setBusy(true); setApproved(false); setKit(await generateKit('canva', D.creator)); setBusy(false) }
   return (<>
-    <Head title="Fork kit" sub="A ready-to-shoot video based on real gaps and your style">
-      <button className="btn" onClick={regen} disabled={busy}>{busy ? <><span className="spin" />Generating…</> : '⟳ Regenerate'}</button>
-      <button className="btn primary" onClick={() => setApproved(true)}>{approved ? '✓ Approved' : 'Approve'}</button>
+    <Head title="Content kit" sub="A ready-to-shoot video based on real gaps and your style">
+      <button className="btn" onClick={regen} disabled={busy}>{busy ? <><span className="spin" />Generating…</> : 'Regenerate'}</button>
+      <button className="btn primary" onClick={() => setApproved(true)}>{approved ? 'Approved' : 'Approve'}</button>
       <button className="btn" onClick={() => navigator.clipboard?.writeText(JSON.stringify(kit, null, 2))}>Export ▾</button>
     </Head>
     <div className="grid2" style={{ gridTemplateColumns: '1.1fr 1fr' }}>
       <div className="col">
-        <div className="card"><div className="small">🎬 Video idea</div><div className="big" style={{ marginTop: 8 }}>{kit.idea}</div></div>
+        <div className="card"><div className="small">Video idea</div><div className="big" style={{ marginTop: 8 }}>{kit.idea}</div></div>
         <div className="card" style={{ marginTop: 16 }}><b style={{ color: 'var(--purple2)' }}>Hook (0–5s)</b><p style={{ lineHeight: 1.5 }}>{kit.hook}</p></div>
         <div className="row" style={{ marginTop: 16 }}>
           <div className="card col"><b>Caption (draft)</b><p className="small">{kit.caption}</p></div>
-          <div className="card col"><b>♪ Audio suggestion</b><p className="small">{kit.audio}</p></div>
+          <div className="card col"><b>Audio suggestion</b><p className="small">{kit.audio}</p></div>
         </div>
       </div>
       <div className="col">
         <div className="card"><b>Shot list (≈ 60–75s)</b>
           {kit.shots.map((s) => <div className="shot" key={s.t}><span className="ts">{s.t}</span><span>{s.d}</span></div>)}</div>
-        <div className="card" style={{ marginTop: 16 }}><b style={{ color: 'var(--lime)' }}>✦ Why it will work</b>
+        <div className="card" style={{ marginTop: 16 }}><b style={{ color: 'var(--lime)' }}>Why it will work</b>
           <div style={{ marginTop: 10 }}>{kit.why.map((w) => <span className="chip lime" key={w}>{w}</span>)}</div></div>
       </div>
     </div>
@@ -178,7 +178,7 @@ export function WeeklyPlan() {
           <div className="thumb" style={{ background: `linear-gradient(140deg, hsl(${p.hue} 70% 45%), hsl(${p.hue + 40} 60% 18%))` }}><span>{p.len}</span></div>
           <b>{p.title}</b>
           <div style={{ margin: '10px 0' }}>{p.tags.map((t) => <span className="chip" key={t}>{t}</span>)}</div>
-          <span className={'badge ' + (p.status === 'Draft' ? 'b-amber' : 'b-green')}>{p.status === 'Draft' ? '○' : '✓'} {p.status}</span>
+          <span className={'badge ' + (p.status === 'Draft' ? 'b-amber' : 'b-green')}>{p.status}</span>
         </div>))}
     </div> : <div className="card"><b>Brand view</b> <span className="small">Top creators & formats by topic fit · Canva layoffs</span>
       <table style={{ marginTop: 8 }}><thead><tr><th>Creator</th><th>Audience</th><th>Best format (for this topic)</th><th>Fit score</th></tr></thead>

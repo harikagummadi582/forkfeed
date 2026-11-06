@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { TrendRadar, DeepDive, VideoBreakdown, AudienceGaps, CreatorProfile, ForkKit, WeeklyPlan } from './pages/index.jsx'
 
 const NAV = [
-  ['radar', 'Trend Radar', '⚡'], ['dive', 'Deep-dive', '🔍'], ['video', 'Video Breakdown', '🎬'],
-  ['gaps', 'Audience Gaps', '👥'], ['profile', 'Creator Profile', '🙂'], ['kit', 'Fork Kit', '🍴'], ['plan', 'Weekly Plan', '🗓'],
+  ['radar', 'Trend Radar'], ['dive', 'Deep-dive'], ['video', 'Video Breakdown'],
+  ['gaps', 'Audience Gaps'], ['profile', 'Creator Profile'], ['kit', 'Content Kit'], ['plan', 'Weekly Plan'],
 ]
 
 export default function App() {
@@ -16,10 +16,10 @@ export default function App() {
   return (
     <div className="app">
       <aside className="side">
-        <div className="logo"><i>⑂</i>ForkFeed</div>
-        {NAV.map(([id, label, icon]) => (
+        <div className="logo"><i>W</i>Whitespace</div>
+        {NAV.map(([id, label]) => (
           <button key={id} className={'nav' + (page === id ? ' on' : '')} onClick={() => go(id)}>
-            <span>{icon}</span>{label}
+            {label}
           </button>
         ))}
       </aside>
