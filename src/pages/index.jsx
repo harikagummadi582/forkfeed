@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import * as D from '../data.js'
 import { generateKit } from '../api.js'
+import { Sparkline, Donut, WhitespaceMap, Stat } from '../viz.jsx'
 
 const Head = ({ title, sub, children }) => (
   <div className="head"><div><h1>{title}</h1><div className="sub">{sub}</div></div><div className="row" style={{ alignItems: 'center' }}>{children}</div></div>
@@ -12,13 +13,20 @@ export function TrendRadar({ go }) {
     <Head title="Trend Radar" sub="Topics trending among education creators">
       <span className="pill">Education creators ▾</span><span className="pill">Last 7 days ▾</span>
     </Head>
+    <div className="grid4" style={{ marginBottom: 16 }}>
+      <Stat label="Topics tracked" value="5" delta="+2 this week" />
+      <Stat label="Videos analyzed" value="745" delta="Instagram + TikTok" />
+      <Stat label="Open angles found" value="3" delta="low coverage" />
+      <Stat label="Unanswered questions" value="1,284" delta="across 5 topics" />
+    </div>
     <div className="card" style={{ padding: 6 }}>
       <table>
-        <thead><tr><th>Topic</th><th>Velocity</th><th>Videos</th><th>Top platforms</th><th /></tr></thead>
+        <thead><tr><th>Topic</th><th>7-day trend</th><th>Velocity</th><th>Videos</th><th>Platforms</th><th /></tr></thead>
         <tbody>
           {D.topics.map((t) => (
             <tr key={t.id} className="click" onClick={() => go('dive')}>
               <td><b>{t.name}</b><div className="small">{t.sub}</div></td>
+              <td><Sparkline data={t.trend} /></td>
               <td><span className="badge b-green">+{t.velocity}%</span></td>
               <td>{t.videos}</td><td><Plats /></td><td>›</td>
             </tr>
@@ -35,6 +43,10 @@ export function DeepDive({ go }) {
   return (<>
     <Head title="Canva layoffs — Topic deep-dive" sub="237 videos from education creators · Last 7 days"><button className="btn">Refresh</button></Head>
     <div className="tabs">{['Angle clusters', 'All videos (237)', 'Key takeaways'].map((t) => <button key={t} className={'tab' + (tab === t ? ' on' : '')} onClick={() => setTab(t)}>{t}</button>)}</div>
+    <div className="card" style={{ marginBottom: 16 }}>
+      <b>Whitespace map</b><div className="small" style={{ marginBottom: 6 }}>Each bubble is an angle. Size shows how many videos cover it. Click one to see the audience gap.</div>
+      <WhitespaceMap items={D.angles} onPick={() => go('gaps')} />
+    </div>
     <div className="card" style={{ padding: 6 }}>
       <table>
         <thead><tr><th>Angle (what creators are saying)</th><th>Videos</th><th>Crowded vs open</th></tr></thead>
@@ -95,6 +107,12 @@ export function AudienceGaps({ go }) {
           <tbody>{D.fanQuestions.map((f, i) => (
             <tr key={f.q}><td>{i + 1}. {f.q}</td><td>{f.n}</td><td><span className={'badge ' + st[f.status]}>{f.status}</span></td></tr>))}</tbody></table>
       </div>
+        <div className="card row" style={{ marginTop: 16, alignItems: 'center' }}>
+          <Donut size={140} label="874" sub="questions" parts={[{ k: 'u', v: 510, color: '#ef4444' }, { k: 'p', v: 144, color: '#f59e0b' }, { k: 'a', v: 220, color: '#22c55e' }]} />
+          <div><b>Question coverage</b>
+            {[['Unanswered', '#ef4444', '58%'], ['Partially answered', '#f59e0b', '17%'], ['Answered', '#22c55e', '25%']].map(([n, c, v]) => <div key={n} className="shot"><span style={{ width: 10, height: 10, borderRadius: 3, background: c, display: 'inline-block' }} /><span className="col">{n}</span><span>{v}</span></div>)}
+          </div>
+        </div>
         <div className="card" style={{ marginTop: 16 }}><b>Sentiment across the video</b><div className="small" style={{ marginBottom: 10 }}>Audience positivity by timestamp</div>
           <div className="spark">{D.sentimentCurve.map((v, i) => <div key={i} style={{ height: v + '%' }} />)}</div></div>
       </div>

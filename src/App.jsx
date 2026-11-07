@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Background } from './viz.jsx'
 import { TrendRadar, DeepDive, VideoBreakdown, AudienceGaps, CreatorProfile, ForkKit, WeeklyPlan } from './pages/index.jsx'
 
 const NAV = [
@@ -14,6 +15,8 @@ export default function App() {
     gaps: <AudienceGaps go={go} />, profile: <CreatorProfile />, kit: <ForkKit />, plan: <WeeklyPlan />,
   }
   return (
+    <>
+    <Background />
     <div className="app">
       <aside className="side">
         <div className="logo"><i>W</i>Whitespace</div>
@@ -23,7 +26,8 @@ export default function App() {
           </button>
         ))}
       </aside>
-      <main className="main">{pages[page]}</main>
+      <main className="main" key={page}>{pages[page]}</main>
     </div>
+    </>
   )
 }

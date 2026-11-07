@@ -2,19 +2,19 @@
 // Swap these mock objects for Oriane / LLM calls in src/api.js later.
 
 export const topics = [
-  { id: 'canva', name: 'Canva layoffs', sub: 'Career, design industry, AI impact', velocity: 412, videos: 237 },
-  { id: 'jr-ai', name: 'AI replacing junior devs', sub: 'Jobs, skills, what to learn', velocity: 286, videos: 189 },
-  { id: 'ai-tools', name: 'Best AI tools for students', sub: 'Productivity, studying, creation', velocity: 164, videos: 145 },
-  { id: 'degree', name: 'Is a design degree still worth it?', sub: 'Career, ROI, AI disruption', velocity: 121, videos: 98 },
-  { id: 'future', name: 'How to future-proof your career', sub: 'Skills, learning paths', velocity: 97, videos: 76 },
+  { id: 'canva', name: 'Canva layoffs', sub: 'Career, design industry, AI impact', velocity: 412, videos: 237, trend: [4, 6, 9, 14, 30, 62, 100] },
+  { id: 'jr-ai', name: 'AI replacing junior devs', sub: 'Jobs, skills, what to learn', velocity: 286, videos: 189, trend: [10, 14, 18, 30, 44, 61, 80] },
+  { id: 'ai-tools', name: 'Best AI tools for students', sub: 'Productivity, studying, creation', velocity: 164, videos: 145, trend: [20, 24, 30, 33, 41, 48, 52] },
+  { id: 'degree', name: 'Is a design degree still worth it?', sub: 'Career, ROI, AI disruption', velocity: 121, videos: 98, trend: [12, 11, 16, 20, 22, 30, 33] },
+  { id: 'future', name: 'How to future-proof your career', sub: 'Skills, learning paths', velocity: 97, videos: 76, trend: [16, 18, 17, 22, 24, 27, 30] },
 ]
 
 export const angles = [
-  { name: 'Career advice', sub: 'What to do if you’re affected, next steps', videos: 82, crowded: 86, level: 'Crowded' },
-  { name: 'AI blamed', sub: 'Layoffs as an AI cost-cutting signal', videos: 56, crowded: 78, level: 'Crowded' },
-  { name: 'What to learn next', sub: 'Skills to stay relevant', videos: 41, crowded: 61, level: 'Medium' },
-  { name: 'Impact on the design industry', sub: 'What it means for design roles overall', videos: 32, crowded: 52, level: 'Medium' },
-  { name: 'What it means for junior designers', sub: 'How it affects entry-level talent', videos: 9, crowded: 18, level: 'Open' },
+  { name: 'Career advice', sub: 'What to do if you’re affected, next steps', videos: 82, demand: 140, crowded: 86, level: 'Crowded' },
+  { name: 'AI blamed', sub: 'Layoffs as an AI cost-cutting signal', videos: 56, demand: 90, crowded: 78, level: 'Crowded' },
+  { name: 'What to learn next', sub: 'Skills to stay relevant', videos: 41, demand: 160, crowded: 61, level: 'Medium' },
+  { name: 'Impact on the design industry', sub: 'What it means for design roles overall', videos: 32, demand: 70, crowded: 52, level: 'Medium' },
+  { name: 'What it means for junior designers', sub: 'How it affects entry-level talent', videos: 9, demand: 312, crowded: 18, level: 'Open' },
 ]
 
 export const breakdown = [

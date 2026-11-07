@@ -64,3 +64,29 @@ tr.click { cursor: pointer; } tr.click:hover td { background: var(--panel2); }
 .spin { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--line); border-top-color: var(--lime); border-radius: 50%; animation: s .7s linear infinite; vertical-align: -2px; margin-right: 8px; }
 @keyframes s { to { transform: rotate(360deg); } }
 .live { background: rgba(182, 242, 60, .12); color: var(--lime); }
+
+/* ---------- dynamic background ---------- */
+.bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: var(--bg); }
+.orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: .42; will-change: transform; }
+.o1 { width: 560px; height: 560px; background: #6d3df0; top: -160px; left: 8%; animation: drift1 26s ease-in-out infinite alternate; }
+.o2 { width: 480px; height: 480px; background: #3b82f6; bottom: -140px; right: 6%; opacity: .3; animation: drift2 32s ease-in-out infinite alternate; }
+.o3 { width: 380px; height: 380px; background: #b6f23c; top: 38%; left: 52%; opacity: .12; animation: drift3 38s ease-in-out infinite alternate; }
+.gridlines { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 46px 46px; mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 75%); animation: gridmove 40s linear infinite; }
+@keyframes drift1 { to { transform: translate(260px, 180px) scale(1.15); } }
+@keyframes drift2 { to { transform: translate(-300px, -160px) scale(1.2); } }
+@keyframes drift3 { to { transform: translate(-380px, 120px) scale(.8); } }
+@keyframes gridmove { to { background-position: 46px 46px; } }
+.app { position: relative; z-index: 1; }
+.side { background: rgba(14, 14, 23, .72); backdrop-filter: blur(14px); }
+.card { background: rgba(19, 19, 29, .72); backdrop-filter: blur(10px); }
+.main > * { animation: rise .45s ease both; }
+.main > *:nth-child(2) { animation-delay: .06s; } .main > *:nth-child(3) { animation-delay: .12s; } .main > *:nth-child(4) { animation-delay: .18s; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.stat { padding: 14px 16px; } .statv { font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin: 4px 0 2px; }
+.pulse { transform-box: fill-box; transform-origin: center; animation: ping 2s ease-out infinite; }
+@keyframes ping { from { opacity: .55; transform: scale(1); } to { opacity: 0; transform: scale(2.4); } }
+.donut-seg { animation: sweep .9s ease both; } @keyframes sweep { from { opacity: 0; } to { opacity: 1; } }
+.spark div { transform-origin: bottom; animation: grow .7s ease both; } @keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.logo i { animation: glow 4s ease-in-out infinite alternate; } @keyframes glow { to { box-shadow: 0 0 18px rgba(182, 242, 60, .55); } }
+@media (prefers-reduced-motion: reduce) { .orb, .gridlines, .pulse, .main > *, .logo i { animation: none; } }
