@@ -133,7 +133,7 @@ export function CreatorProfile() {
     <div className="grid2" style={{ gridTemplateColumns: '1fr 1fr' }}>
       <div className="col">
         <div className="card row" style={{ alignItems: 'center' }}>
-          <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--purple)', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 20 }}>A</div>
+          <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'linear-gradient(135deg,#4f46e5,#8b5cf6)', color: '#fff', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 20 }}>A</div>
           <div><b style={{ fontSize: 18 }}>{c.name}</b><div className="small">{c.role}</div><div className="small">{c.followers} followers · {c.views} total views</div></div>
           <div style={{ marginLeft: 'auto' }}><div className="small" style={{ marginBottom: 6 }}>Niche</div>{c.niche.map((n) => <span className="chip" key={n}>{n}</span>)}</div>
         </div>
@@ -193,7 +193,7 @@ export function WeeklyPlan() {
       {D.weekPlan.map((p) => (
         <div className="card" key={p.day}>
           <div className="small" style={{ marginBottom: 8 }}>{p.day}</div>
-          <div className="thumb" style={{ background: `linear-gradient(140deg, hsl(${p.hue} 70% 45%), hsl(${p.hue + 40} 60% 18%))` }}><span>{p.len}</span></div>
+          <div className="thumb" style={{ background: `linear-gradient(140deg, hsl(${p.hue} 75% 62%), hsl(${p.hue + 40} 70% 78%))` }}><span>{p.len}</span></div>
           <b>{p.title}</b>
           <div style={{ margin: '10px 0' }}>{p.tags.map((t) => <span className="chip" key={t}>{t}</span>)}</div>
           <span className={'badge ' + (p.status === 'Draft' ? 'b-amber' : 'b-green')}>{p.status}</span>
