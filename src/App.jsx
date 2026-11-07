@@ -19,7 +19,7 @@ export default function App() {
     <Background />
     <div className="app">
       <aside className="side">
-        <div className="logo"><i>W</i>Whitespace</div>
+        <div className="logo"><i>F</i>ForkFeed</div>
         {NAV.map(([id, label]) => (
           <button key={id} className={'nav' + (page === id ? ' on' : '')} onClick={() => go(id)}>
             {label}

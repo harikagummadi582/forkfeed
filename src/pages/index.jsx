@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import * as D from '../data.js'
 import { generateKit } from '../api.js'
-import { Sparkline, Donut, WhitespaceMap, Stat } from '../viz.jsx'
+import { Sparkline, Donut, AngleMap, Stat } from '../viz.jsx'
 import { Avatar, Thumb, VideoCard, PhoneFrame, Frame } from '../art.jsx'
 
 const Head = ({ title, sub, children }) => (
@@ -50,8 +50,8 @@ export function DeepDive({ go }) {
     </div>}
     {tab === 'Angle clusters' && <>
     <div className="card" style={{ marginBottom: 16 }}>
-      <b>Whitespace map</b><div className="small" style={{ marginBottom: 6 }}>Each bubble is an angle. Size shows how many videos cover it. Click one to see the audience gap.</div>
-      <WhitespaceMap items={D.angles} onPick={() => go('gaps')} />
+      <b>Angle map</b><div className="small" style={{ marginBottom: 6 }}>Each bubble is an angle. Size shows how many videos cover it. Click one to see the audience gap.</div>
+      <AngleMap items={D.angles} onPick={() => go('gaps')} />
     </div>
     <div className="card" style={{ padding: 6 }}>
       <table>

@@ -35,8 +35,8 @@ export function Donut({ parts, size = 150, label, sub }) {
   )
 }
 
-// Demand (fan questions) vs coverage (videos). Top-left = whitespace.
-export function WhitespaceMap({ items, onPick }) {
+// Demand (fan questions) vs coverage (videos). Top-left = open angle.
+export function AngleMap({ items, onPick }) {
   const W = 640, H = 300, L = 54, B = 36, T = 16, R = 16
   const px = (v) => L + (v / 100) * (W - L - R)
   const py = (v) => H - B - (v / 360) * (H - B - T)
@@ -47,7 +47,7 @@ export function WhitespaceMap({ items, onPick }) {
         <linearGradient id="ws" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stopColor="#059669" stopOpacity=".16" /><stop offset="1" stopColor="#059669" stopOpacity="0" /></linearGradient>
       </defs>
       <rect x={L} y={T} width={(W - L - R) * 0.38} height={(H - B - T) * 0.45} rx="10" fill="url(#ws)" stroke="#059669" strokeOpacity=".35" strokeDasharray="4 4" />
-      <text x={L + 10} y={T + (H - B - T) * 0.45 - 24} fill="#059669" fontSize="11" fontWeight="600">WHITESPACE</text>
+      <text x={L + 10} y={T + (H - B - T) * 0.45 - 24} fill="#059669" fontSize="11" fontWeight="600">OPEN ANGLE</text>
       <text x={L + 10} y={T + (H - B - T) * 0.45 - 10} fill="#64748b" fontSize="10">high demand, low coverage</text>
       {[0, 90, 180, 270, 360].map((v) => <g key={v}><line x1={L} x2={W - R} y1={py(v)} y2={py(v)} stroke="#e7e8ee" strokeWidth="1" /><text x={L - 8} y={py(v) + 3} textAnchor="end" fill="#64748b" fontSize="10">{v}</text></g>)}
       {[0, 25, 50, 75, 100].map((v) => <text key={v} x={px(v)} y={H - B + 16} textAnchor="middle" fill="#64748b" fontSize="10">{v}</text>)}
