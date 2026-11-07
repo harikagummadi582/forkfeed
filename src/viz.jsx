@@ -37,12 +37,12 @@ export function Donut({ parts, size = 150, label, sub }) {
 
 // Demand (fan questions) vs coverage (videos). Top-left = open angle.
 export function AngleMap({ items, onPick }) {
-  const W = 640, H = 300, L = 54, B = 36, T = 16, R = 16
+  const W = 1000, H = 290, L = 54, B = 36, T = 16, R = 16
   const px = (v) => L + (v / 100) * (W - L - R)
   const py = (v) => H - B - (v / 360) * (H - B - T)
   const col = { Crowded: '#ef4444', Medium: '#d97706', Open: '#059669' }
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto' }}>
+    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 262, display: 'block' }}>
       <defs>
         <linearGradient id="ws" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stopColor="#059669" stopOpacity=".16" /><stop offset="1" stopColor="#059669" stopOpacity="0" /></linearGradient>
       </defs>
