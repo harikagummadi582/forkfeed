@@ -113,3 +113,26 @@ export const brandFit = [
   { name: 'Leo', audience: '89K', fmt: 'Career advice (short, <60s)', fit: 88 },
   { name: 'Emma', audience: '321K', fmt: 'List / next steps (1–2 min)', fit: 86 },
 ]
+
+// Sample videos used for thumbnails in screenshots.
+export const videos = [
+  { title: 'Canva just laid off staff. Here is why.', creator: 'Maya Chen', views: '482K', dur: '1:24', platform: 'tiktok', hue: 262, seed: 2 },
+  { title: 'What the Canva layoffs mean for designers', creator: 'Leo Park', views: '215K', dur: '0:58', platform: 'instagram', hue: 200, seed: 1 },
+  { title: 'AI is not the reason. Overhiring is.', creator: 'Emma Ruiz', views: '640K', dur: '1:41', platform: 'tiktok', hue: 330, seed: 4 },
+  { title: '5 skills to learn after a layoff', creator: 'Dev Patel', views: '173K', dur: '1:12', platform: 'instagram', hue: 160, seed: 3 },
+  { title: 'Should you leave Canva for Figma?', creator: 'Sara Kim', views: '96K', dur: '0:47', platform: 'tiktok', hue: 24, seed: 6 },
+  { title: 'Junior designers: read this today', creator: 'Noah Wells', views: '58K', dur: '1:03', platform: 'instagram', hue: 290, seed: 5 },
+  { title: 'The real story behind tech layoffs', creator: 'Ava Torres', views: '310K', dur: '2:10', platform: 'tiktok', hue: 230, seed: 8 },
+  { title: 'Design careers in the age of AI', creator: 'Ben Okafor', views: '129K', dur: '1:35', platform: 'instagram', hue: 180, seed: 7 },
+  { title: 'What no one says about layoffs', creator: 'Zoe Martin', views: '87K', dur: '0:52', platform: 'tiktok', hue: 350, seed: 9 },
+  { title: 'Build a portfolio that survives AI', creator: 'Ian Brooks', views: '144K', dur: '1:28', platform: 'instagram', hue: 140, seed: 10 },
+  { title: 'Is Canva still worth learning?', creator: 'Priya Nair', views: '203K', dur: '1:06', platform: 'tiktok', hue: 215, seed: 11 },
+  { title: 'Layoffs explained in 45 seconds', creator: 'Jack Rowe', views: '371K', dur: '0:45', platform: 'tiktok', hue: 40, seed: 12 },
+]
+export const storyboard = [
+  { n: 1, label: 'Hook on camera', hue: 262, seed: 2 },
+  { n: 2, label: 'Recap what happened', hue: 215, seed: 2 },
+  { n: 3, label: 'Impact on juniors', hue: 330, seed: 2 },
+  { n: 4, label: 'Three next steps', hue: 160, seed: 2 },
+  { n: 5, label: 'Wrap up and ask', hue: 24, seed: 2 },
+]

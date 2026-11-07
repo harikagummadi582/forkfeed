@@ -2,11 +2,11 @@ import { useState } from 'react'
 import * as D from '../data.js'
 import { generateKit } from '../api.js'
 import { Sparkline, Donut, WhitespaceMap, Stat } from '../viz.jsx'
+import { Avatar, Thumb, VideoCard, PhoneFrame, Frame } from '../art.jsx'
 
 const Head = ({ title, sub, children }) => (
   <div className="head"><div><h1>{title}</h1><div className="sub">{sub}</div></div><div className="row" style={{ alignItems: 'center' }}>{children}</div></div>
 )
-const Plats = () => <span className="small">Instagram · TikTok</span>
 
 export function TrendRadar({ go }) {
   return (<>
@@ -21,14 +21,14 @@ export function TrendRadar({ go }) {
     </div>
     <div className="card" style={{ padding: 6 }}>
       <table>
-        <thead><tr><th>Topic</th><th>7-day trend</th><th>Velocity</th><th>Videos</th><th>Platforms</th><th /></tr></thead>
+        <thead><tr><th>Topic</th><th>7-day trend</th><th>Velocity</th><th>Videos</th><th>Top videos</th><th /></tr></thead>
         <tbody>
           {D.topics.map((t) => (
             <tr key={t.id} className="click" onClick={() => go('dive')}>
               <td><b>{t.name}</b><div className="small">{t.sub}</div></td>
               <td><Sparkline data={t.trend} /></td>
               <td><span className="badge b-green">+{t.velocity}%</span></td>
-              <td>{t.videos}</td><td><Plats /></td><td>›</td>
+              <td>{t.videos}</td><td><div className="thumbs">{D.videos.slice(t.id.length % 4, (t.id.length % 4) + 3).map((v) => <Thumb key={v.title} v={v} small />)}</div></td><td>›</td>
             </tr>
           ))}
         </tbody>
@@ -43,6 +43,12 @@ export function DeepDive({ go }) {
   return (<>
     <Head title="Canva layoffs — Topic deep-dive" sub="237 videos from education creators · Last 7 days"><button className="btn">Refresh</button></Head>
     <div className="tabs">{['Angle clusters', 'All videos (237)', 'Key takeaways'].map((t) => <button key={t} className={'tab' + (tab === t ? ' on' : '')} onClick={() => setTab(t)}>{t}</button>)}</div>
+    {tab === 'All videos (237)' && <div className="vgrid">{D.videos.slice(0, 12).map((v) => <VideoCard key={v.title} v={v} />)}</div>}
+    {tab === 'Key takeaways' && <div className="card glow" style={{ maxWidth: 720 }}>
+      <b>Key takeaways</b>
+      {['Career advice and AI-blame angles are saturated, with 138 videos between them.', 'Fans keep asking what this means for junior designers, and only 9 videos answer it.', 'Explainers under 90 seconds get the strongest retention on this topic.', 'Posting in the next 48 hours catches the trend before it peaks.'].map((t) => <div className="shot" key={t}><span className="col">{t}</span></div>)}
+    </div>}
+    {tab === 'Angle clusters' && <>
     <div className="card" style={{ marginBottom: 16 }}>
       <b>Whitespace map</b><div className="small" style={{ marginBottom: 6 }}>Each bubble is an angle. Size shows how many videos cover it. Click one to see the audience gap.</div>
       <WhitespaceMap items={D.angles} onPick={() => go('gaps')} />
@@ -64,6 +70,7 @@ export function DeepDive({ go }) {
         </tbody>
       </table>
     </div>
+    </>}
   </>)
 }
 
@@ -73,7 +80,7 @@ export function VideoBreakdown() {
   return (<>
     <Head title="Video breakdown" sub="Canva layoffs · Video 12 of 237"><button className="btn">‹</button><button className="btn">›</button></Head>
     <div className="row">
-      <div style={{ width: 240 }}><div className="video">The Canva layoffs in 60 seconds<small>0:00 / 1:24</small></div></div>
+      <div style={{ width: 250 }}><PhoneFrame title="The Canva layoffs in 60 seconds" /><div className="row" style={{ alignItems: 'center', marginTop: 14, gap: 10 }}><Avatar seed={2} hue={262} size={34} /><div><b>Maya Chen</b><div className="small" style={{ marginTop: 0 }}>482K views · TikTok</div></div></div></div>
       <div className="col">
         <div className="tabs">{['Analysis', 'On-screen text', 'Comments (423)'].map((t) => <button key={t} className={'tab' + (tab === t ? ' on' : '')} onClick={() => setTab(t)}>{t}</button>)}</div>
         {tab === 'Analysis' && <div className="card">
@@ -133,7 +140,7 @@ export function CreatorProfile() {
     <div className="grid2" style={{ gridTemplateColumns: '1fr 1fr' }}>
       <div className="col">
         <div className="card row" style={{ alignItems: 'center' }}>
-          <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'linear-gradient(135deg,#4f46e5,#8b5cf6)', color: '#fff', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: 20 }}>A</div>
+          <Avatar seed={1} hue={250} size={56} />
           <div><b style={{ fontSize: 18 }}>{c.name}</b><div className="small">{c.role}</div><div className="small">{c.followers} followers · {c.views} total views</div></div>
           <div style={{ marginLeft: 'auto' }}><div className="small" style={{ marginBottom: 6 }}>Niche</div>{c.niche.map((n) => <span className="chip" key={n}>{n}</span>)}</div>
         </div>
@@ -179,6 +186,8 @@ export function ForkKit() {
           <div style={{ marginTop: 10 }}>{kit.why.map((w) => <span className="chip lime" key={w}>{w}</span>)}</div></div>
       </div>
     </div>
+    <div className="card" style={{ marginTop: 18 }}><b>Storyboard</b><div className="small" style={{ marginBottom: 14 }}>Suggested frames for each shot</div>
+      <div className="story">{D.storyboard.map((f) => <Frame key={f.n} {...f} />)}</div></div>
   </>)
 }
 
@@ -193,7 +202,7 @@ export function WeeklyPlan() {
       {D.weekPlan.map((p) => (
         <div className="card" key={p.day}>
           <div className="small" style={{ marginBottom: 8 }}>{p.day}</div>
-          <div className="thumb" style={{ background: `linear-gradient(140deg, hsl(${p.hue} 75% 62%), hsl(${p.hue + 40} 70% 78%))` }}><span>{p.len}</span></div>
+          <Thumb bare v={{ title: p.title, hue: p.hue, seed: p.title.length % 8, platform: 'tiktok', dur: p.len }} />
           <b>{p.title}</b>
           <div style={{ margin: '10px 0' }}>{p.tags.map((t) => <span className="chip" key={t}>{t}</span>)}</div>
           <span className={'badge ' + (p.status === 'Draft' ? 'b-amber' : 'b-green')}>{p.status}</span>
@@ -201,7 +210,7 @@ export function WeeklyPlan() {
     </div> : <div className="card"><b>Brand view</b> <span className="small">Top creators & formats by topic fit · Canva layoffs</span>
       <table style={{ marginTop: 8 }}><thead><tr><th>Creator</th><th>Audience</th><th>Best format (for this topic)</th><th>Fit score</th></tr></thead>
         <tbody>{D.brandFit.map((b) => (
-          <tr key={b.name}><td><b>{b.name}</b></td><td>{b.audience}</td><td>{b.fmt}</td>
+          <tr key={b.name}><td><div className="row" style={{ alignItems: 'center', gap: 10 }}><Avatar seed={b.name.length + b.name.charCodeAt(0)} hue={(b.name.charCodeAt(0) * 7) % 360} size={34} /><b>{b.name}</b></div></td><td>{b.audience}</td><td>{b.fmt}</td>
             <td><div className="row" style={{ alignItems: 'center' }}><span className="badge b-green">{b.fit}%</span><div className="bar"><div style={{ width: b.fit + '%', background: 'var(--green)' }} /></div></div></td></tr>))}</tbody></table>
     </div>}
   </>)
